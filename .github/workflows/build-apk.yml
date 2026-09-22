@@ -478,16 +478,10 @@ jobs:
       - name: Build APK
         run: gradle assembleDebug --no-daemon
 
-      - name: Commit Android project
-        run: |
-          git config user.name "github-actions"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Create SUIVI-TRX Android V1" || true
-          git push
-
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: SUIVI-TRX-V1
+          name: SUIVI-TRX-APK
           path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 7
